@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "Enemy.h"
 #include <stdlib.h>
 #include <time.h>   
 Character::Character(){
@@ -38,30 +39,3 @@ void Character::levelUp() {
 		this->expNext = this->level * 100;
 	}
 }
-void Character::rest() {
-	this->HP = this->maxHP;
-	cout<<endl<<endl<<this->name << " decides to lay down for a bit, and take a nap. " << endl;
-	cout << this->name << "'s HP is fully restored" << endl<<endl;
-}
-void Character::explore() {
-	cout << endl << endl << this->name << " decides to look around" << endl;
-	srand(time(NULL));
-	int event;
-	event = rand() % 2 + 0;
-	if (event == 0) {
-		find();
-	}
-	else if (1<=event<=2) {
-		fight();
-	}
-}
-void Character::find() {
-	cout <<this->name << " finds a gold coin. +1 GOLD" << endl;
-	cout << "+10 EXP" << endl<<endl;
-	this->gold++;
-	this->exp += 10;
-};
-void Character::fight() {
-	cout << this->name << " encounters an enemy. It's a zombie! Time to fight!" << endl;
-
-};

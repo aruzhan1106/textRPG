@@ -14,6 +14,10 @@ public:
     virtual ~Game();
 	void mainMenu();
 	void initGame();
+	void fight();
+	void rest();
+	void explore();
+	void find();
 
 private:
 	int choice;

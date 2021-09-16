@@ -13,10 +13,6 @@ public:
 	void initialize(string name);
 	void printStats() const;
 	void levelUp();
-	void rest();
-	void explore();
-	void find();
-	void fight();
 
 	inline const string& getName() const { return this->name; }
 	inline const int& getMaxHP() const { return this->maxHP; }
@@ -27,6 +23,9 @@ public:
 	inline const int& getExpNext() const { return this->expNext; }
 	inline const int& getGold() const { return this->gold; }
 
+	void setHP(int HP) { this->HP = HP; }
+	void setGold(int gold) { this->gold = gold; }
+	void setExp(int exp) { this->exp = exp; }
 private:
 	string name;
 	int maxHP;
