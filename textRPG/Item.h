@@ -5,12 +5,15 @@ class Item
 {
 public:
 	Item();
-	virtual ~Item();
-	inline std::string debugPrint() const {
+	Item(std::string itemName, std::string itemDescription);
+	std::string getItemName() const {
 		return this->itemName;
+	}
+	std::string getItemDescription() const {
+		return this->itemDescription;
 	}
 private:
 	std::string itemName;
-	int itemDamage;
+	std::string itemDescription;
 };
 

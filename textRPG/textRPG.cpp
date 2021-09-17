@@ -4,14 +4,7 @@ int main()
 {
     Game game; //game initialized
     game.initGame();
-
-    Inventory inventory;
-    /*inventory.addItem(Item());
-    inventory.addItem(Item());
-    inventory.addItem(Item());
-    inventory.addItem(Item());
-    inventory.addItem(Item());
-    inventory.debugPrint(); */
+    /*inventory.addItem(Item());*/
     while (game.getPlaying()) {
         game.mainMenu();
     }

@@ -1,8 +1,9 @@
 #include "Item.h"
 Item::Item() {
 	this->itemName = "None";
-	this->itemDamage = 0;
+	this->itemDescription = "No description";
 }
-Item::~Item() {
-
+Item::Item(std::string itemName, std::string itemDescription) {
+	this->itemName = itemName;
+	this->itemDescription = itemDescription;
 }

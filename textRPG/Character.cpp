@@ -17,7 +17,7 @@ void Character::initialize(string name){
 	this->name = name;
 	this->maxHP = 30;
 	this->HP = 10;
-	this->attack = 1;
+	this->attack = 7;
 	this->level = 1;
 	this->exp = 0;
 	this->expNext = 100;

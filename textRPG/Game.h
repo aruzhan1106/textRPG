@@ -25,5 +25,6 @@ private:
 
 	Character character;
 	Enemy enemy;
+	Inventory inventory;
 };
 

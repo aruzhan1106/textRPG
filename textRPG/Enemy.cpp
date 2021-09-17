@@ -1,5 +1,5 @@
 #include "Enemy.h"
 Enemy::Enemy() {
-	enemyHP = 20;
+	enemyHP = rand()%30+20;
 };
 Enemy::~Enemy() {};
