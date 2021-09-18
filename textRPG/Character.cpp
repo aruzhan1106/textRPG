@@ -1,7 +1,6 @@
 #include "Character.h"
 #include "Enemy.h"
-#include <stdlib.h>
-#include <time.h>   
+
 Character::Character(){
 	this->name = "Player";
 	this->maxHP = 0;
@@ -36,6 +35,10 @@ void Character::levelUp() {
 	if (this->exp >= this->expNext) {
 		this->exp -= this->expNext;
 		this->level++;
+		this->maxHP += 5;
 		this->expNext = this->level * 100;
 	}
+}
+int Character::getBaseAttack() {
+	return 7;
 }

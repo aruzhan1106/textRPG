@@ -1,16 +1,16 @@
 #pragma once
 #include <iostream>
-#include <string>
 using namespace std;
 class Enemy
 {
 public:
+	//Constructor and Destructor
 	Enemy();
 	virtual ~Enemy();
-	int getEnemyHP() { return this->enemyHP; }
 
+	//Getter and Setter
+	int getEnemyHP() { return this->enemyHP; }
 	void setEnemyHP(int enemyHP) { this->enemyHP = enemyHP; }
 private:
 	int enemyHP;
 };
-

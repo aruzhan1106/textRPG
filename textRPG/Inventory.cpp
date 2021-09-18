@@ -5,10 +5,6 @@ Inventory::Inventory() {
 	this->itemArray = new Item * [inventoryCapacity];
 }
 Inventory::~Inventory() {
-	for (int i = 0; i < this->numberOfItems; i++) {
-		delete this->itemArray[i];
-	}
-	delete[] itemArray;
 }
 void Inventory::debugPrint(){
 	if (this->numberOfItems == 0) {
@@ -22,11 +18,10 @@ void Inventory::debugPrint(){
 			std::cout << "Adds " << this->itemArray[i]->getItemAttack() << " to your attack power"<<std::endl;
 			std::cout << this->itemArray[i]->getItemDescription() << std::endl<< std::endl;
 		}
-		std::cout << "\nEQUIPPED ITEM" << std::endl;
+		std::cout << "EQUIPPED ITEM" << std::endl;
 		std::cout << this->itemArray[bestAttackItem()]->getItemName() << std::endl;
 	}
 }
-
 void Inventory::addItem(const Item& item) {
 	this->itemArray[this->numberOfItems++] = new Item(item);
 };

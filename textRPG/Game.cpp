@@ -3,6 +3,7 @@
 Game::Game() {
 	choice = 0;
 	playing = true;
+	itemChoice = 0;
 };
 Game::~Game() {};
 
@@ -72,7 +73,19 @@ void Game::find() {
 	character.setGold(character.getGold() + 1);
 	character.setExp(character.getExp() + 10);
 	if (inventory.isInventoryFull() == false) {
-		inventory.addItem(Item("Rock", 1, "It's sharp, and cool to the touch"));
+		cout << "Will you put the item in your inventory?"<<endl;
+		cout << "1. Yes" << endl;
+		cout << "2. No" << endl;
+		cout << "\nChoice: " << endl;
+		cin >> itemChoice;
+		switch (itemChoice) {
+		case 1:
+			inventory.addItem(Item("Rock", 1, "It's sharp, and cool to the touch"));
+			break;
+		case 2:
+			cout<< "The item was discarded." << endl;
+			break;
+		}
 	}
 	else {
 		cout << "Your inventory is full." << endl;
@@ -85,8 +98,8 @@ void Game::fight() {
 	cout<<"buzzing sound and slowly approaching you. Time to fight!" << endl;
 	while (character.getHP() >= 1 && enemy.getEnemyHP() >= 1) {
 		srand((unsigned int)time(NULL));
-		int damageToEnemy = rand() % 10 + 5;
-		int damageToCharacter = rand() % 10 + 5;
+		int damageToEnemy = rand() % character.getAttack() + 3;
+		int damageToCharacter = rand() % 6 + 2;
 		enemy.setEnemyHP(enemy.getEnemyHP()- damageToEnemy);
 		character.setHP(character.getHP()- damageToCharacter);
 		cout << character.getName()<< " strikes the enemy dealing " << damageToEnemy << " damage. The monster now has " << enemy.getEnemyHP() << " HP." << endl;
@@ -94,10 +107,23 @@ void Game::fight() {
 			cout << "You win!" << endl;
 			cout << "You gained +3 GOLD!" << endl;
 			cout << "You gained +30 EXP!" << endl;
+			cout << "You found an item: Lead Pipe" << endl;
 			character.setGold(character.getGold() + 3);
 			character.setExp(character.getExp() + 30);
 			if (inventory.isInventoryFull() == false) {
-				inventory.addItem(Item("Lead Pipe", 5, "Better weapon than a rock."));
+				cout << "Will you put the item in your inventory?" << endl;
+				cout << "1. Yes" << endl;
+				cout << "2. No" << endl;
+				cout << "\nChoice: " << endl;
+				cin >> itemChoice;
+				switch (itemChoice) {
+				case 1:
+					inventory.addItem(Item("Lead Pipe", 5, "Better weapon than a rock."));
+					break;
+				case 2:
+					cout << "The item was discarded." << endl;
+					break;
+				}
 			}
 			else {
 				cout << "Your inventory is full." << endl;
@@ -130,5 +156,5 @@ void Game::fight() {
 	}
 }
 void Game::updateStats() {
-	character.setAttack(7+inventory.fetchItemAttack(inventory.bestAttackItem()));
+	character.setAttack(character.getBaseAttack()+inventory.fetchItemAttack(inventory.bestAttackItem()));
 }

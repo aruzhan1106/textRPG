@@ -7,13 +7,17 @@ using namespace std;
 class Character
 {
 public: 
+	//Constructors and Destructor
 	Character();
 	virtual ~Character();
 
-	void initialize(string name);
-	void printStats() const;
-	void levelUp();
+	void initialize(string name); //Initializes the character
+	void printStats() const; //Prints stats such as HP, EXP, level, attack power
+	void levelUp(); //This function gets called after exploring to check if
+	//the character can level up
+	int getBaseAttack(); //Used for getting the character's base attack
 
+	//Getters and Setters for the private fields
 	inline const string& getName() const { return this->name; }
 	inline const int& getMaxHP() const { return this->maxHP; }
 	inline const int& getHP() const { return this->HP; }
@@ -28,7 +32,7 @@ public:
 	void setExp(int exp) { this->exp = exp; }
 	void setAttack(int attack) { this->attack = attack; }
 private:
-	string name;
+	string name; 
 	int maxHP;
 	int HP;
 	int attack;
