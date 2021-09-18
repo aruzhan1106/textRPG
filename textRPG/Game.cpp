@@ -81,7 +81,8 @@ void Game::find() {
 	updateStats();
 };
 void Game::fight() {
-	cout << character.getName()<< " encounters an enemy. It's a hideous mothlike creature! It's making a buzzing sound and slowly approaching you. Time to fight!" << endl;
+	cout << character.getName() << " encounters an enemy. It's a hideous mothlike creature! It's making a" << endl;
+	cout<<"buzzing sound and slowly approaching you. Time to fight!" << endl;
 	while (character.getHP() >= 1 && enemy.getEnemyHP() >= 1) {
 		srand((unsigned int)time(NULL));
 		int damageToEnemy = rand() % 10 + 5;
@@ -129,5 +130,5 @@ void Game::fight() {
 	}
 }
 void Game::updateStats() {
-	character.setAttack(character.getAttack()+inventory.fetchItemAttack());
+	character.setAttack(7+inventory.fetchItemAttack(inventory.bestAttackItem()));
 }

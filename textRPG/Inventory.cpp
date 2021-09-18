@@ -22,7 +22,8 @@ void Inventory::debugPrint(){
 			std::cout << "Adds " << this->itemArray[i]->getItemAttack() << " to your attack power"<<std::endl;
 			std::cout << this->itemArray[i]->getItemDescription() << std::endl<< std::endl;
 		}
-		std::cout<<bestAttackItem();
+		std::cout << "\nEQUIPPED ITEM" << std::endl;
+		std::cout << this->itemArray[bestAttackItem()]->getItemName() << std::endl;
 	}
 }
 
@@ -35,8 +36,8 @@ bool Inventory::isInventoryFull() {
 	}
 	else return false;
 }
-int Inventory::fetchItemAttack() {
-	return this->itemArray[0]->getItemAttack();
+int Inventory::fetchItemAttack(int index) {
+	return this->itemArray[index]->getItemAttack();
 }
 int Inventory::bestAttackItem() {
 	int indexOfBestWeapon = 0;

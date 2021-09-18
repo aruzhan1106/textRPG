@@ -9,3 +9,5 @@ Item::Item(std::string itemName, int itemAttack, std::string itemDescription) {
 	this->itemAttack = itemAttack;;
 	this->itemDescription = itemDescription;
 }
+Item::~Item() {
+};

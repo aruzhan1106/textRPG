@@ -7,7 +7,7 @@ public:
 	virtual ~Inventory();
 	void addItem(const Item &item);
 	void debugPrint();
-	int fetchItemAttack();
+	int fetchItemAttack(int index);
 	bool isInventoryFull();
 	int bestAttackItem();
 private:
