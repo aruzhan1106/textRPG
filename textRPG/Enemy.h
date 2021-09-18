@@ -7,7 +7,7 @@ class Enemy
 public:
 	Enemy();
 	virtual ~Enemy();
-	int getEnemyHP() { return enemyHP; }
+	int getEnemyHP() { return this->enemyHP; }
 
 	void setEnemyHP(int enemyHP) { this->enemyHP = enemyHP; }
 private:

@@ -6,13 +6,13 @@ public:
 	Inventory();
 	virtual ~Inventory();
 	void addItem(const Item &item);
-	void removeItem(int index);
 	void debugPrint();
+	int fetchItemAttack();
+	bool isInventoryFull();
+	int bestAttackItem();
 private:
 	int inventoryCapacity;
 	int numberOfItems;
 	Item **itemArray;
-	void expandInventory();
-	void initializeInventory(const int from);
 };
 

@@ -26,6 +26,7 @@ public:
 	void setHP(int HP) { this->HP = HP; }
 	void setGold(int gold) { this->gold = gold; }
 	void setExp(int exp) { this->exp = exp; }
+	void setAttack(int attack) { this->attack = attack; }
 private:
 	string name;
 	int maxHP;

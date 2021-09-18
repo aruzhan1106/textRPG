@@ -15,38 +15,39 @@ void Inventory::debugPrint(){
 		std::cout << "Your inventory is empty" << std::endl;
 	}
 	else {
+		std::cout << "INVENTORY" << std::endl;
+		std::cout << "\n";
 		for (int i = 0; i < this->numberOfItems; i++) {
 			std::cout << this->itemArray[i]->getItemName() << std::endl;
+			std::cout << "Adds " << this->itemArray[i]->getItemAttack() << " to your attack power"<<std::endl;
 			std::cout << this->itemArray[i]->getItemDescription() << std::endl<< std::endl;
 		}
+		std::cout<<bestAttackItem();
 	}
 }
 
 void Inventory::addItem(const Item& item) {
-	if (this->numberOfItems >= this->inventoryCapacity) {
-		expandInventory();
-	}
 	this->itemArray[this->numberOfItems++] = new Item(item);
 };
-void Inventory::removeItem(int index) {};
-void Inventory::expandInventory() 
-{
-	this->inventoryCapacity *= 2;
-	Item** tempArray = new Item * [this->inventoryCapacity];
-	for (int i = 0; i < this->numberOfItems; i++) {
-		tempArray[i] = new Item(*this->itemArray[i]);
+bool Inventory::isInventoryFull() {
+	if (this->numberOfItems == this->inventoryCapacity) {
+		return true;
 	}
-	for (int i = 0; i < this->numberOfItems; i++) {
-		delete this->itemArray[i];
+	else return false;
+}
+int Inventory::fetchItemAttack() {
+	return this->itemArray[0]->getItemAttack();
+}
+int Inventory::bestAttackItem() {
+	int indexOfBestWeapon = 0;
+	int bestWeaponAttack = this->itemArray[0]->getItemAttack();
+	if (this->numberOfItems > 1) {
+		for (int i = 1; i < this->numberOfItems; i++) {
+			if (this->itemArray[i]->getItemAttack() > bestWeaponAttack) {
+				indexOfBestWeapon = i;
+				bestWeaponAttack = this->itemArray[i]->getItemAttack();
+			}
+		}
 	}
-	delete[] this->itemArray;
-	this->itemArray = tempArray;
-	this->initializeInventory(this->numberOfItems);
-
-};
-void Inventory::initializeInventory(const int from) 
-{
-	for (int i = from; i < inventoryCapacity; i++) {
-		this->itemArray[i] = nullptr;
-	}
-};
+	return indexOfBestWeapon;
+}

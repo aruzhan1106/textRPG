@@ -8,16 +8,20 @@ Game::~Game() {};
 
 void Game::initGame() {
 	string name;
-	cout << "MASS CALAMITY" << endl << endl;
-	cout << "WELCOME, PLAYER" << endl << endl;
-	cout << "Enter name for character:"<< endl;
+	cout << "ELYSIUM" << endl;
+	cout << "\nWELCOME, PLAYER" << endl;
+	cout << "\nEnter name for character:"<< endl;
 	getline(cin, name);
 	character.initialize(name);
+	cout << "\n\nThere is a place called Elysium where the poisonous plant Belladonna grows." << endl;
+	cout << name << " wakes up in one of the caves in this place." << endl;
+	cout << "Due to the fact that the belladon plant grows very densely just next to this cave," << endl;
+	cout << "the strong smell of the plant causes hallucinations. And now, in order to get out of " << endl;
+	cout << "this cave, " << name << " will need to fight with hideous moth creatures." << endl;
 }
 
 void Game::mainMenu() {
-	cout << endl<< "MAIN MENU" << endl << endl;
-	cout << "0: Quit" << endl;
+	cout << endl<<"0: Quit" << endl;
 	cout << "1: Explore" << endl;
 	cout << "2: Rest" << endl;
 	cout << "3: Show Stats & Inventory" << endl;
@@ -67,10 +71,17 @@ void Game::find() {
 	cout << "You found an item: Rock" << endl;
 	character.setGold(character.getGold() + 1);
 	character.setExp(character.getExp() + 10);
-	inventory.addItem(Item("Rock", "It's sharp, and cool to touch"));
+	if (inventory.isInventoryFull() == false) {
+		inventory.addItem(Item("Rock", 1, "It's sharp, and cool to the touch"));
+	}
+	else {
+		cout << "Your inventory is full." << endl;
+		cout << "The item was discarded." << endl;
+	}
+	updateStats();
 };
 void Game::fight() {
-	cout << character.getName()<< " encounters an enemy. It's a monster! Time to fight!" << endl;
+	cout << character.getName()<< " encounters an enemy. It's a hideous mothlike creature! It's making a buzzing sound and slowly approaching you. Time to fight!" << endl;
 	while (character.getHP() >= 1 && enemy.getEnemyHP() >= 1) {
 		srand((unsigned int)time(NULL));
 		int damageToEnemy = rand() % 10 + 5;
@@ -82,18 +93,22 @@ void Game::fight() {
 			cout << "You win!" << endl;
 			cout << "You gained +3 GOLD!" << endl;
 			cout << "You gained +30 EXP!" << endl;
-			cout << "You found an item: Rock" << endl;
-			cout << "You found an item: Family Photograph" << endl;
 			character.setGold(character.getGold() + 3);
 			character.setExp(character.getExp() + 30);
-			inventory.addItem(Item("Rock","It's sharp, and cool to touch"));
-			inventory.addItem(Item("Family Photograph","It's a picture of your mom, dad, and brother. Everyone is smiling warmly."));
-			enemy.setEnemyHP(20);
+			if (inventory.isInventoryFull() == false) {
+				inventory.addItem(Item("Lead Pipe", 5, "Better weapon than a rock."));
+			}
+			else {
+				cout << "Your inventory is full." << endl;
+				cout << "The item was discarded." << endl;
+			}
+			updateStats();
+			enemy.setEnemyHP(rand() % 20 + 10);
 			break;
 		}
 		cout << "The monster takes a swing at " << character.getName() << " and deals " << damageToCharacter << " damage. " << character.getName() << " now has " << character.getHP() << " HP." << endl << endl;
 		if (character.getHP() < 1) {
-			enemy.setEnemyHP(20);
+			enemy.setEnemyHP(rand() % 20 + 10);
 			cout << "You lose!" << endl;
 			break;
 		}
@@ -103,13 +118,16 @@ void Game::fight() {
 		int choiceFight;
 		cout << "Choice: ";
 		cin >> choiceFight;
-		switch (choiceFight) {
-		case 1: 
+		if (choiceFight == 1) {
 			continue;
-		case 2:
+		}
+		else if (choiceFight == 2) {
+			enemy.setEnemyHP(rand() % 20 + 10);
 			cout << "You run away from the enemy" << endl;
 			break;
-		default: break;
 		}
 	}
+}
+void Game::updateStats() {
+	character.setAttack(character.getAttack()+inventory.fetchItemAttack());
 }

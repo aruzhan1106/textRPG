@@ -9,6 +9,7 @@ class Game
 {
 public: 
 	bool getPlaying() const;
+	void updateStats();
 
 	Game();
     virtual ~Game();
