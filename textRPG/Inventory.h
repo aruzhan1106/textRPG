@@ -13,6 +13,9 @@ public:
 	int fetchItemAttack(int index); //gets an item's attack power using its index
 	bool isInventoryFull(); //checks whether the inventory is full
 	int bestAttackItem(); //determines which item has the largest attack power
+	//Getters
+	int getNumberOfItems() { return this->numberOfItems; }
+	int getInventoryCapacity() { return this->inventoryCapacity; }
 private:
 	int inventoryCapacity; //how many items can the inventory fit
 	int numberOfItems; //how many items are in the inventory right now

@@ -21,7 +21,7 @@ public:
 	void rest();//Restores the character's HP to full
 	void explore();//Initiates either a fight or a discovery
 	void find();//The character finds an item, gains EXP and gold
-
+	bool isNameCorrect(string name);
 private:
 	int choice; //used in the main menu for deciding what the player will do next
 	bool playing; //as long as it is equal to TRUE the game will be running

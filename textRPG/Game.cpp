@@ -13,12 +13,24 @@ void Game::initGame() {
 	cout << "\nWELCOME, PLAYER" << endl;
 	cout << "\nEnter name for character:"<< endl;
 	getline(cin, name);
+	do{
+		cout << "Invalid inpit. Please only use letters." << endl;
+		cout << "\nEnter name for character:" << endl;
+		getline(cin, name);
+	} while (isNameCorrect(name) == false);
 	character.initialize(name); //after inputing the name the premise of the game is displayed
 	cout << "\n\nThere is a place called Elysium where the poisonous plant Belladonna grows." << endl;
 	cout << name << " wakes up in one of the caves in this place." << endl;
 	cout << "Due to the fact that the belladon plant grows very densely just next to this cave," << endl;
 	cout << "the strong smell of the plant causes hallucinations. And now, in order to get out of " << endl;
 	cout << "this cave, " << name << " will need to fight with hideous moth creatures." << endl;
+}
+bool Game::isNameCorrect(string name) {
+	for (int i = 0; i < name.size(); i++) {
+		if (!isalpha(name[i]))
+			return false;
+	}
+	return true;
 }
 
 void Game::mainMenu() {
@@ -58,18 +70,25 @@ void Game::rest() {
 void Game::explore() {
 	cout << endl << endl <<character.getName()<< " decides to look around" << endl;
 	srand((unsigned int)time(NULL));
-	int event = rand() % 3;
-	if (event == 0) {
+	int eventExplore = rand() % 3;
+	if (eventExplore == 0) {
 		find();
 	}
-	else if (event>=1) {
+	else if (eventExplore>=1) {
 		fight();
 	}
 };
 void Game::find() {
 	cout << character.getName()<< " finds a gold coin. +1 GOLD" << endl;
 	cout << "+10 EXP" << endl << endl;
-	cout << "You found an item: Rock" << endl;
+	srand((unsigned int)time(NULL));
+	int eventItem = rand() % 3;
+	if (eventItem == 0) {
+		cout << "You found an item: Rock" << endl;
+	}
+	else if (eventItem >= 1) {
+		cout << "You found an item: Rusty Knife" << endl;
+	}
 	character.setGold(character.getGold() + 1);
 	character.setExp(character.getExp() + 10);
 	if (inventory.isInventoryFull() == false) {
@@ -80,7 +99,12 @@ void Game::find() {
 		cin >> itemChoice;
 		switch (itemChoice) {
 		case 1:
-			inventory.addItem(Item("Rock", 1, "It's sharp, and cool to the touch"));
+			if (eventItem == 0) {
+				inventory.addItem(Item("Rock", 2, "It has a smooth, cold surface"));
+			}
+			else if (eventItem >= 1) {
+				inventory.addItem(Item("Rusty Knife", 1, "Its blade quite dull, but it's better than nothing"));
+			}
 			break;
 		case 2:
 			cout<< "The item was discarded." << endl;
@@ -107,7 +131,14 @@ void Game::fight() {
 			cout << "You win!" << endl;
 			cout << "You gained +3 GOLD!" << endl;
 			cout << "You gained +30 EXP!" << endl;
-			cout << "You found an item: Lead Pipe" << endl;
+			srand((unsigned int)time(NULL));
+			int eventItem = rand() % 3;
+			if (eventItem == 0) {
+				cout << "You found an item: Lead Pipe" << endl;
+			}
+			else if (eventItem >= 1) {
+				cout << "You found an item: Wooden Bat" << endl;
+			}
 			character.setGold(character.getGold() + 3);
 			character.setExp(character.getExp() + 30);
 			if (inventory.isInventoryFull() == false) {
@@ -118,7 +149,12 @@ void Game::fight() {
 				cin >> itemChoice;
 				switch (itemChoice) {
 				case 1:
-					inventory.addItem(Item("Lead Pipe", 5, "Better weapon than a rock."));
+					if (eventItem == 0) {
+						inventory.addItem(Item("Lead Pipe", 5, "It's heavy and rusty."));
+					}
+					else if (eventItem >= 1) {
+						inventory.addItem(Item("Wooden Bat", 4, "It has red stains on it, hopefully it's paint."));
+					}
 					break;
 				case 2:
 					cout << "The item was discarded." << endl;
@@ -156,5 +192,7 @@ void Game::fight() {
 	}
 }
 void Game::updateStats() {//updates the attack stats in the main menu
-	character.setAttack(character.getBaseAttack()+inventory.fetchItemAttack(inventory.bestAttackItem()));
+	if (inventory.getNumberOfItems() != 0) {
+		character.setAttack(character.getBaseAttack() + inventory.fetchItemAttack(inventory.bestAttackItem()));
+	}
 }
