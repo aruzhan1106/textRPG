@@ -13,7 +13,7 @@ void Game::initGame() {
 	cout << "\nWELCOME, PLAYER" << endl;
 	cout << "\nEnter name for character:"<< endl;
 	getline(cin, name);
-	character.initialize(name);
+	character.initialize(name); //after inputing the name the premise of the game is displayed
 	cout << "\n\nThere is a place called Elysium where the poisonous plant Belladonna grows." << endl;
 	cout << name << " wakes up in one of the caves in this place." << endl;
 	cout << "Due to the fact that the belladon plant grows very densely just next to this cave," << endl;
@@ -23,7 +23,7 @@ void Game::initGame() {
 
 void Game::mainMenu() {
 	cout << endl<<"0: Quit" << endl;
-	cout << "1: Explore" << endl;
+	cout << "1: Explore" << endl; //exploring either initiates an enemy encounter or an item discovery
 	cout << "2: Rest" << endl;
 	cout << "3: Show Stats & Inventory" << endl;
 	cout << endl << "Choice: ";
@@ -155,6 +155,6 @@ void Game::fight() {
 		}
 	}
 }
-void Game::updateStats() {
+void Game::updateStats() {//updates the attack stats in the main menu
 	character.setAttack(character.getBaseAttack()+inventory.fetchItemAttack(inventory.bestAttackItem()));
 }
